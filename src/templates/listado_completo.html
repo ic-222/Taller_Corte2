@@ -1,0 +1,73 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Listado Completo</title>
+</head>
+<body>
+    <h1>Estudiantes</h1>
+    <ul>
+        {% for estudiante in estudiantes %}
+        <li>{{ estudiante[1] }} {{ estudiante[2] }} (Edad: {{ estudiante[3] }})</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Cursos con Estudiantes Inscritos</h1>
+    <ul>
+        {% for curso in cursos_con_estudiantes %}
+        <li>{{ curso[0] }} - {{ curso[1] }} {{ curso[2] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html> -->
+
+<!--HTML CON Y SIN ESTILOS-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listado Completo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            background-color: #007BFF;
+            color: #FFF;
+            padding: 10px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+        }
+        .estudiantes-list {
+            background-color: #EFEFEF;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .cursos-list {
+            background-color: #EFEFEF;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Estudiantes</h1>
+    <ul class="estudiantes-list">
+        {% for estudiante in estudiantes %}
+        <li>{{ estudiante[1] }} {{ estudiante[2] }} (Edad: {{ estudiante[3] }})</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Cursos con Estudiantes Inscritos</h1>
+    <ul class="cursos-list">
+        {% for curso in cursos_con_estudiantes %}
+        <li>{{ curso[0] }} - {{ curso[1] }} {{ curso[2] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
