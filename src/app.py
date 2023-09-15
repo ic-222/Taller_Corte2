@@ -7,7 +7,7 @@ app = Flask(__name__)
 ## CONECTAR BASE DE DATOS DESDE ACCESS
 conn_str = (
     r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
-    r'DBQ=C:\Users\cuc\Documents\1509\Parcial1\TaskDB.accdb;'
+    r'DBQ=C:\Users\cuc\Documents\1509\Taller\TaskDB.accdb;'
 )
 
 def conectar_bd():
@@ -46,6 +46,16 @@ def completar_tarea(id):
     conn = conectar_bd()
     cursor = conn.cursor()
     cursor.execute("UPDATE Tareas SET estado = 'Completado' WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('mostrar_tareas'))
+
+# Eliminar una tarea
+@app.route('/eliminar_tarea/<int:id>')
+def eliminar_tarea(id):
+    conn = conectar_bd()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM Tareas WHERE id = ?", (id,))
     conn.commit()
     conn.close()
     return redirect(url_for('mostrar_tareas'))
