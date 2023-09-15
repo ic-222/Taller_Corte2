@@ -13,7 +13,7 @@ conn_str = (
 def conectar_bd():
     return pyodbc.connect(conn_str)
 
-# ## APP
+# ## APP CÓDIGO
 @app.route('/')
 def mostrar_tasks():
     conn = conectar_bd()
@@ -24,21 +24,31 @@ def mostrar_tasks():
     conn.close()
     return render_template('mostrar_tareas.html', tareas=tareas)
 
-## AGREGAR ACCIONES
+## ACCIONES DE LA APP
+
 ## Agregar tarea
 
 @app.route('/agregar_tarea', methods=['POST'])
 def agregar_tarea():
     if request.method == 'POST':
         descripcion = request.form['descripcion']
-        conn = connect_db()
+        conn = conectar_bd()
         cursor = conn.cursor()
         cursor.execute("INSERT INTO Tareas (descripcion, estado) VALUES (?, ?)", (descripcion, 'No Completado'))
         conn.commit()
         conn.close()
     return redirect(url_for('mostrar_tareas'))
 
+# Marcar una tarea como completada
 
+@app.route('/completar_tarea/<int:id>')
+def completar_tarea(id):
+    conn = conectar_bd()
+    cursor = conn.cursor()
+    cursor.execute("UPDATE Tareas SET estado = 'Completado' WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('mostrar_tareas'))
 
 if __name__ == '__main__':
     app.run(debug=True)
